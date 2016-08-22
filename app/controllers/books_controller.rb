@@ -19,9 +19,10 @@ class BooksController < ApplicationController
 		redirect_to book_url(@books)
 	end
 	def create
-		@books = Book.new(params.require(:books).permit(:name,:description))  
+
+		@books = Book.new(params.require(:book).permit(:name,:description))  
         @books.save 
-        redirect_to  
+        redirect_to books_url(@books) 
 	end
 	
 
@@ -29,7 +30,7 @@ class BooksController < ApplicationController
 	def destroy
 		@books = Book.find(params[:id])
 		@books.destroy
-		redirect_to :action => :index	
+		redirect_to books_url(@books)	
 	end
 
 	
