@@ -1,0 +1,7 @@
+<%=form_for @books, :url => new_book_path do |f|%>
+<%= f.label "書名" %>
+<%= f.text_field :name %>
+<%= f.label "簡介" %>
+<%= f.text_area :description%>
+<%= f.submit "新增"%>
+<%end%>

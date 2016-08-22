@@ -1,0 +1,11 @@
+<%= form_for @books , :url => book_path(@books) ,:method =>:patch  do |f|%>
+
+<%= f.label " 書名" %>
+<%= f.text_field :name %>
+<%= f.label "簡介" %>
+<%= f.text_area :description%>
+<%= f.submit "完成編輯"%>
+
+
+
+<%end%>
