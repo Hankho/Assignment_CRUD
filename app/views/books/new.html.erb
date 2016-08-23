@@ -1,5 +1,4 @@
-
-<%=form_for @books,  :url => books_path ,:method => :post do |f|%>
+<%=form_for @book,  :url => books_path ,:method => :post do |f|%>
 <%= f.label "書名" %>
 <%= f.text_field :name %>
 <%= f.label "簡介" %>
