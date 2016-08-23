@@ -1,5 +1,8 @@
-<%= @book.name%>
 
-<%= simple_format(@book.description)%>
 
-<%= link_to "返回書本索引", books_path%>
+<h2><%= @book.name%></h2>
+
+<h4><%= simple_format(@book.description)%></h4>
+
+<br>
+<%= link_to "返回清單", books_path, :class => "btn btn-primary"%>

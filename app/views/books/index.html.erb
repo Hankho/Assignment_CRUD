@@ -1,18 +1,23 @@
 <h1> 書本管理系統 </h1>
 
-
+<table class="table">
 
 <% @books.each do |book|%>
 
-<li>
-	<%= book.name%>
-	<%= link_to "書本資訊", book_path(book) %>
-	<%= link_to "編輯本書",  edit_book_path(book) %>
-	<%= link_to "刪除本書" , book_path(book) ,:method => :delete %>
+	<tr>
+		<td>
+		<%= book.name%>
+		</td>
+			<td>
 
+			<%= link_to "書本資訊", book_path(book), :class => "btn btn-primary" %>
+			<%= link_to "編輯本書",  edit_book_path(book), :class => "btn btn-default" %>
+			<%= link_to "刪除本書" , book_path(book) ,:method => :delete, :class => "btn btn-danger" %>
+			</td>
 
+	</tr>
 <%end%>
-</li>
+</table>
 
-<%= link_to "新增書本" , new_book_path %>
+<%= link_to "新增書本" , new_book_path, :class =>"btn btn-primary" %>
 
