@@ -1,36 +1,63 @@
 class BooksController < ApplicationController
+	before_action :set_book , :only => [:show , :edit , :update , :destroy]
+
 	def index
-		@books = Book.all
+		@books = Book.page(params[:page]).per(5)
+		if params[:id]
+			@book = Book.find(params[:id]) 
+		else
+			@book = Book.new
+		end
+		# @book = Book.new
 	end
 	
 	def show
-		@book = Book.find(params[:id])
+   		
 	end
 	
 	def new
 		@book = Book.new
 	end
 	def edit
-		@book = Book.find(params[:id])
+
 	end
 	def update
-		@book = Book.find(params[:id])
-		@book.update(params.require(:book).permit(:name,:description))
-		redirect_to book_path
+
+		if @book.update(book_params)
+			flash[:notice] = "編輯成功"
+			redirect_to books_path
+		else
+			flash[:notice] = "編輯失敗"
+			render :action => :edit		#借edit 的頁面
+		end
+		
 	end
 	def create
 
-		@book = Book.new(params.require(:book).permit(:name,:description))  
-        @book.save 
-        redirect_to books_path 
+		@book = Book.new(book_params)  
+        if @book.save
+        	flash[:notice] ="新增成功"
+        	redirect_to books_path
+        else
+        	flash[:notice] ="新增失敗"
+        	render :action => :new		#借new 的頁面
+        end 
+
 	end
 	
-
-	
 	def destroy
-		@book = Book.find(params[:id])
+
 		@book.destroy
-		redirect_to books_path	
+		flash[:notice] = "刪除成功"
+		redirect_to books_path(:page => params[:page])
+	end
+
+	private
+	def book_params
+		params.require(:book).permit(:name,:description)
+	end
+	def set_book
+		@book = Book.find(params[:id])
 	end
 
 	
