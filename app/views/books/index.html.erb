@@ -1,5 +1,4 @@
 <h1> 書本管理系統 </h1>
-<%= paginate @books %>
 
 <table class="table">
 	<% @books.each do |book|%>
@@ -8,6 +7,7 @@
 				<%= book.name%>
 			</td>
 			<td>
+				<%= link_to " 讀者清單", book_readers_path(book), :class => "btn btn-primary"%>
 				<%= link_to "書本資訊", book_path(book), :class => "btn btn-primary" %>
 				<%= link_to "編輯本書",  books_path(:id => book , :page => params[:page]), :class => "btn btn-default" %>
 				<%= link_to "刪除本書" , book_path(book, :page => params[:page]) ,:method => :delete, :class => "btn btn-danger" %>
@@ -23,8 +23,9 @@
       <% end %>
       </ul>
 <% end %>
-
-<% if @book.id %>
+<%= paginate @books %>
+<br>
+<% if @book.id %>      	
 	<%= "UPDATE" %>
 <% else %>
 	<%= "NEW" %>

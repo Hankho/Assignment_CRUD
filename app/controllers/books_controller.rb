@@ -34,10 +34,10 @@ class BooksController < ApplicationController
 	end
 	def create
 
-		@book = Book.new(book_params)  
+		@book = Book.new(book_params)   #@book = Book.new(params.require(:book).permit(:name,:description)) 
         if @book.save
         	flash[:notice] ="新增成功"
-        	redirect_to books_path
+        	redirect_to books_path  
         else
         	flash[:notice] ="新增失敗"
         	render :action => :new		#借new 的頁面
